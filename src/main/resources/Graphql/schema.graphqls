@@ -1,0 +1,39 @@
+type Compte{
+    id : String,
+    createdAt :Float,
+    balance :Float,
+    currency : String,
+    type : String
+}
+
+type Query{
+    ListComptes : [Compte]
+    comptesbyId (id:String): Compte
+
+}
+type Mutation {
+    createCompte (Compte : compteDto ) : Compte
+    updateCompte2 (id: ID!,Compte: updateCompte2 ): Compte
+    deleteCompte2(id: ID!): String
+}
+
+input compteDto{
+    balance :Float,
+    currency : String,
+    type : String
+}
+input updateCompte2 {
+    balance: Float  # Optional balance update
+    currency: String # Optional currency update
+    type: String    # Optional type update
+}
+
+
+input deleteCompte2 {
+   id :String
+}
+
+
+
+
+
