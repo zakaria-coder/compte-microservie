@@ -27,5 +27,7 @@ public class Compte {
     @Enumerated(EnumType.STRING)
     @JsonProperty("compteType")
     private CompteType type;
+    @ManyToOne
+    private Customer customer;
 
 }

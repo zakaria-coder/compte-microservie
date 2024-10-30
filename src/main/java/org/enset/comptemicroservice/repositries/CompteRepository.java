@@ -16,5 +16,7 @@ public interface CompteRepository extends JpaRepository<Compte,String> {
     @RestResource(path ="/bytype")
     List<Compte> findByType(@Param("t") CompteType type);
 
+
+
 }
 

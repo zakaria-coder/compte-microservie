@@ -2,17 +2,17 @@ package org.enset.comptemicroservice.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.enset.comptemicroservice.enums.CompteType;
 
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor @Builder
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class CompteResponse {
 
     @Id

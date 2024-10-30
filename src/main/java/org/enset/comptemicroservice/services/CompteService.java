@@ -13,6 +13,7 @@ public interface CompteService {
     Compte createCompte(Compte compte);
 
     CompteResponse createCompte(CompteRequest compteRequest);
+    CompteResponse updateCompte2(String id,CompteRequest compteRequest);
 
     Optional<Compte> getCompteById(String id);
 
@@ -21,5 +22,6 @@ public interface CompteService {
     Compte updateCompte(String id, Compte updatedCompte);
 
     void deleteCompte(String id);
+
 
 }

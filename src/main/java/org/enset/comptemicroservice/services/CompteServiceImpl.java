@@ -41,11 +41,11 @@ public class CompteServiceImpl implements CompteService  {
                 .build();
 
         Compte compteSaved = compteRepository.save(compte);
-
         CompteResponse compteResponse = compteMapper.fromCompte(compteSaved);
         return  compteResponse;
 
     }
+
 
     @Override
     public Optional<Compte> getCompteById(String id) {
@@ -75,4 +75,40 @@ public class CompteServiceImpl implements CompteService  {
     public void deleteCompte(String id) {
         compteRepository.deleteById(id);
     }
+
+    @Override
+    public CompteResponse updateCompte2(String id,CompteRequest compteRequest) {
+        Optional<Compte> optionalCompte = compteRepository.findById(id);
+        if (optionalCompte.isPresent()) {
+            Compte compte = optionalCompte.get();
+            if (compteRequest.getBalance() != null) {
+                compte.setBalance(compteRequest.getBalance());
+            }
+            if (compteRequest.getCurrency() != null) {
+                compte.setCurrency(compteRequest.getCurrency());
+            }
+            if (compteRequest.getType() != null) {
+                compte.setType(compteRequest.getType());
+            }
+
+            return compteMapper.fromCompte(compteRepository.save(compte));
+        } else {
+
+            throw new RuntimeException("Compte with ID " + compteRequest.getId() + " not found.");
+
+        }
+    }
+
+
+    public String deleteCompte2(String id) {
+        if (compteRepository.existsById(id)) {
+            compteRepository.deleteById(id);
+            return "Compte with ID " + id + " deleted successfully";
+        } else {
+            throw new RuntimeException("Account with ID " + id + " does not exist.");
+        }
+
+    }
+
 }
+
