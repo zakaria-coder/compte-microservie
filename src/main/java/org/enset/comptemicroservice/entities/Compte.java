@@ -1,5 +1,6 @@
 package org.enset.comptemicroservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.enset.comptemicroservice.enums.CompteType;
@@ -24,6 +25,7 @@ public class Compte {
     private double balance;
     private String currency;
     @Enumerated(EnumType.STRING)
+    @JsonProperty("compteType")
     private CompteType type;
 
 }

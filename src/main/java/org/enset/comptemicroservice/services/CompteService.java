@@ -1,5 +1,7 @@
 package org.enset.comptemicroservice.services;
 
+import org.enset.comptemicroservice.DTO.CompteRequest;
+import org.enset.comptemicroservice.DTO.CompteResponse;
 import org.enset.comptemicroservice.entities.Compte;
 import org.springframework.stereotype.Service;
 
@@ -8,8 +10,9 @@ import java.util.Optional;
 
 @Service
 public interface CompteService {
-
     Compte createCompte(Compte compte);
+
+    CompteResponse createCompte(CompteRequest compteRequest);
 
     Optional<Compte> getCompteById(String id);
 

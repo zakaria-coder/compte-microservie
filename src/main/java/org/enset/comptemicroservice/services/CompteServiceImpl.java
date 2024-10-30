@@ -1,15 +1,25 @@
 package org.enset.comptemicroservice.services;
 
+import org.enset.comptemicroservice.DTO.CompteRequest;
+import org.enset.comptemicroservice.DTO.CompteResponse;
+import org.enset.comptemicroservice.Mappers.CompteMapper;
 import org.enset.comptemicroservice.entities.Compte;
 import org.enset.comptemicroservice.repositries.CompteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class CompteServiceImpl implements CompteService  {
+     @Autowired
+    private  CompteRepository compteRepository;
 
-    private final CompteRepository compteRepository;
+     @Autowired
+     private CompteMapper compteMapper;
 
     public CompteServiceImpl(CompteRepository compteRepository) {
         this.compteRepository = compteRepository;
@@ -18,6 +28,23 @@ public class CompteServiceImpl implements CompteService  {
     @Override
     public Compte createCompte(Compte compte) {
         return compteRepository.save(compte);
+    }
+
+    @Override
+    public CompteResponse createCompte(CompteRequest compteRequest) {
+        Compte compte = Compte.builder()
+                .id(UUID.randomUUID().toString())
+                .createdAt(new Date())
+                .balance(compteRequest.getBalance())
+                .currency(compteRequest.getCurrency())
+                .type(compteRequest.getType())
+                .build();
+
+        Compte compteSaved = compteRepository.save(compte);
+
+        CompteResponse compteResponse = compteMapper.fromCompte(compteSaved);
+        return  compteResponse;
+
     }
 
     @Override
