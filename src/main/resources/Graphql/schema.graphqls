@@ -4,15 +4,13 @@ type Compte{
     balance :Float,
     currency : String,
     type : String
-<<<<<<< HEAD
-    customer :Customer
+
 }
 type Customer{
     id : ID,
     name : String
     comptes: [Compte]
-=======
->>>>>>> origin/dev2graphql
+
 }
 
 type Query{
