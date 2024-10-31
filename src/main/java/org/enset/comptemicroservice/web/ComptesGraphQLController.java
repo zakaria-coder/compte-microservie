@@ -13,7 +13,6 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class ComptesGraphQLController {
 
 @Autowired
 private CompteRepository compteRepository;
-
+@Autowired
 private CustomerRepository customerRepository;
 
 @Autowired
@@ -32,7 +31,11 @@ private CompteService   compteService;
 public List<Compte> ListComptes(){
     return compteRepository.findAll();
 }
-
+    @QueryMapping
+    public Compte comptesbyId(@Argument String id ){
+        return compteRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException(String.format("id %s not found",id)));
+    }
     @MutationMapping
     public CompteResponse createCompte (@Argument("Compte") CompteRequest compte ){
         return compteService.createCompte(compte);
@@ -54,11 +57,6 @@ public List<Compte> ListComptes(){
         } else {
             throw new RuntimeException("Account with ID " + id + " does not exist.");
         }
-    }
-    @QueryMapping
-    public Compte comptesbyId(@Argument String id ){
-        return compteRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException(String.format("id %s not found",id)));
     }
     @SchemaMapping(field = "customer", typeName = "Compte")
     public Customer getCustomer(Compte compte) {

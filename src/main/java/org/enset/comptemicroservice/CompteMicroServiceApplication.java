@@ -27,27 +27,27 @@ public class CompteMicroServiceApplication {
 
         return args -> {
             Stream.of("ZAKARIA","AHLAM","LINA","YAHYA").forEach(c ->{
-                    Customer customer = Customer.builder()
-                            .name(c)
-                            .build();
-                    customerRepository.save(customer);
-                    });
+                Customer customer = Customer.builder()
+                        .name(c)
+                        .build();
+                customerRepository.save(customer);
+            });
 
             customerRepository.findAll().forEach(customer ->{
-            for(int i=1;i < 10;i++){
-            Compte compte = new Compte().builder()
-                    .id(UUID.randomUUID().toString())
-                    .type(Math.random()>0.5? CompteType.CURRENT_ACCOUNT:CompteType.SAVING_ACCOUNT)
-                    .balance(10000+Math.random()*90000)
-                    .createdAt(new Date())
-                    .currency("MAD")
-                    .customer(customer)
-                    .build();
+                for(int i=1;i < 10;i++){
+                    Compte compte = new Compte().builder()
+                            .id(UUID.randomUUID().toString())
+                            .type(Math.random()>0.5? CompteType.CURRENT_ACCOUNT:CompteType.SAVING_ACCOUNT)
+                            .balance(10000+Math.random()*90000)
+                            .createdAt(new Date())
+                            .currency("MAD")
+                            .customer(customer)
+                            .build();
 
-             compteRepository.save(compte);
-            System.out.println("Initial data loaded into the Compte table.");
+                    compteRepository.save(compte);
+                    System.out.println("Initial data loaded into the Compte table.");
 
-            }
+                }
             });
 
         };

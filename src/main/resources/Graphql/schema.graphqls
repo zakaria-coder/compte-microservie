@@ -1,28 +1,23 @@
-type Compte{
-    id : String,
-    createdAt :Float,
-    balance :Float,
-    currency : String,
-    type : String
-<<<<<<< HEAD
-    customer :Customer
+type Compte {
+    id: String
+    createdAt: Float
+    balance: Float
+    currency: String
+    type: String
+    customer: Customer
 }
+
 type Customer{
     id : ID,
     name : String
     comptes: [Compte]
-=======
->>>>>>> origin/dev2graphql
+
 }
 
 type Query{
     ListComptes : [Compte]
     comptesbyId (id:String): Compte
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/dev2graphql
 }
 type Mutation {
     createCompte (Compte : compteDto ) : Compte

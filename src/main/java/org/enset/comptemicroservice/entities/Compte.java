@@ -29,5 +29,4 @@ public class Compte {
     private CompteType type;
     @ManyToOne
     private Customer customer;
-
 }
